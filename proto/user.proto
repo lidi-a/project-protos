@@ -6,20 +6,22 @@ import "google/protobuf/empty.proto";
 
 // Сущность пользователь (минимум полей)
 message User {
-  uint32 id    = 1;
+  string id    = 1;
   string email = 2;
+  string password = 3;
 }
 
 // Запрос на создание
 message CreateUserRequest {
   string email = 1;
+  string password = 2;
 }
 message CreateUserResponse {
   User user = 1;
 }
 
 message GetUserRequest {
-  uint32 id = 1;
+  string id = 1;
 }
 
 message GetUserResponse {
@@ -31,17 +33,26 @@ message ListUsersResponse {
 }
 
 message UpdateUserRequest {
+  string id    = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message UpdateUserResponse {
   User user = 1;
 }
 
 message DeleteUserRequest {
-  uint32 id      = 1;
+  string id      = 1;
+}
+
+message DeleteUserResponse {
 }
 
 service UserService {
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
   rpc GetUser(GetUserRequest) returns (GetUserResponse);
   rpc ListUsers(google.protobuf.Empty) returns (ListUsersResponse);
-  rpc UpdateUser(UpdateUserRequest) returns (google.protobuf.Empty);
-  rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
 }
