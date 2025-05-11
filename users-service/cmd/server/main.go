@@ -23,7 +23,7 @@ func main() {
 	repo := user.NewRepository(db)
 	svc := user.NewService(repo)
 
-	log.Println("Starting User gRPC server")
+	log.Println("Starting Users gRPC server")
 	if err := transportgrpc.RunGRPC(svc); err != nil {
 		log.Fatalf("gRPC сервер завершился с ошибкой: %v", err)
 	}
